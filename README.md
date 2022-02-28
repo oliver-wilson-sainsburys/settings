@@ -26,7 +26,7 @@ This process does the following tasks:
 ## Running the script
 * Open the Terminal app and run:
 ```console
-caffeinate sh -c "$(curl -fsSL https://raw.githubusercontent.com/oliver-wilson-dev/settings/master/scripts/setup.sh)"
+caffeinate sh -c "$(curl -fsSL https://raw.githubusercontent.com/oliver-wilson-sainsburys/settings/main/scripts/setup.sh)"
 ```
 ## Manual steps after installation
 Disclaimer: you should have some settings files downloaded into the `~/mac-setup-files` directory.

@@ -14,7 +14,7 @@ install_if_does_not_exist()
 # Homebrew
 if test ! $(which brew); then
     echo "Installing homebrew..."
-    yes '' | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    yes '' | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 brew tap homebrew/cask-cask
 brew tap homebrew/cask-versions
@@ -77,23 +77,25 @@ install_if_does_not_exist nvm
 # Visual Studio Code
 brew install --cask visual-studio-code
 # install extensions
-	code --install-extension andrew-codes.cypress-snippets
-	code --install-extension bierner.markdown-preview-github-styles
-	code --install-extension christian-kohler.npm-intellisense
-	code --install-extension christian-kohler.path-intellisense
-	code --install-extension dbaeumer.vscode-eslint
 	code --install-extension eamodio.gitlens
-	code --install-extension esbenp.prettier-vscode
-	code --install-extension formulahendry.auto-close-tag
-	code --install-extension GitHub.vscode-pull-request-github
-	code --install-extension ngryman.codesandbox-theme
 	code --install-extension Orta.vscode-jest
-	code --install-extension PKief.material-icon-theme
 	code --install-extension shinnn.stylelint
-	code --install-extension shyykoserhiy.vscode-spotify
-	code --install-extension streetsidesoftware.code-spell-checker
 	code --install-extension Tyriar.sort-lines
+	code --install-extension andys8.jest-snippets
+	code --install-extension dbaeumer.vscode-eslint
+	code --install-extension esbenp.prettier-vscode
+	code --install-extension BeardedBear.beardedtheme
+	code --install-extension ngryman.codesandbox-theme
+	code --install-extension PKief.material-icon-theme
 	code --install-extension xabikos.JavaScriptSnippets
+	code --install-extension shyykoserhiy.vscode-spotify
+	code --install-extension formulahendry.auto-close-tag
+	code --install-extension andrew-codes.cypress-snippets
+	code --install-extension christian-kohler.npm-intellisense
+	code --install-extension GitHub.vscode-pull-request-github
+	code --install-extension christian-kohler.path-intellisense
+	code --install-extension streetsidesoftware.code-spell-checker
+	code --install-extension bierner.markdown-preview-github-styles
 # copy settings over
 	yes | cp ~/mac-setup-files/vscode-settings.json ~/Library/Application\ Support/Code/User/settings.json
 
@@ -109,20 +111,22 @@ brew install --cask visual-studio-code
 
 # Other programs
 	OTHER_PROGRAMS=(
-		alfred
-		charles
 		copyq
+		slack
+		alfred
 		docker
 		github
-		google-hangouts
-		insomnia
 		iterm2
 		notion
-		postman
-		slack 
-		spotify
-		whatsapp
 		zeplin
+		notion
+		docker
+		charles
+		postman
+		spotify
+		insomnia
+		whatsapp
+		microsoft-teams
 	)
 
 	brew install --cask ${OTHER_PROGRAMS[@]}
@@ -137,30 +141,6 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool false
 defaults write com.apple.screencapture location ~/Desktop/screenshots
 killall SystemUIServer
 yes | cp -a ~/mac-setup-files/fonts/DankMono/otf/. ~/Library/Fonts
-
-# Make asos directory and clone repos into it
-read -t 60 -p "Would you like to download some of the asos repos? [y/n]" -n 1 -r CLONE_ASOS_REPOS_REPLY
-echo
-if [[ $CLONE_ASOS_REPOS_REPLY =~ ^[Yy]$ ]]
-then
-	mkdir ~/asos
-	cd ~/asos
-	mkdir ./sitechrome
-	mkdir ./saved-lists
-	echo "Enter your git username"
-	read username
-	echo "Enter your git password (note, if you are trying to clone a repo that requires an access token, enter that instead.)"
-	read password
-	git clone https://$username:$password@github.com/asosteam/asos-web-my-account.git my-account
-	git clone https://$username:$password@github.com/asosteam/asos-web-bag.git bag
-	git clone https://$username:$password@github.com/asosteam/asos-web-checkout.git checkout
-	git clone https://$username:$password@github.com/asosteam/asos-web-product-listing-page.git plp
-	git clone https://$username:$password@github.com/asosteam/asos-web-productpage.git pdp
-	git clone https://$username:$password@github.com/asosteam/asos-web-saved-lists.git ./saved-lists/application
-	git clone https://$username:$password@github.com/asosteam/asos-web-saved-lists-stubs.git ./saved-lists/stubs
-	git clone https://$username:$password@github.com/asosteam/asos-web-site-chrome-client-node.git ./sitechrome/client
-	git clone https://$username:$password@github.com/asosteam/asos-web-site-chrome-publisher.git ./sitechrome/publisher
-fi
 
 # zsh
 install_if_does_not_exist zsh
